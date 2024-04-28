@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
+
 
 use Illuminate\Http\Request;
 
@@ -50,5 +52,28 @@ class Usercontrol extends Controller
         return response()->json([
             'message' => 'User Deleted'
         ]);
+    }
+
+    function userNew(Request $request){
+        $user = User::where('email','=', $request['email'])->get();
+        // return var_dump(count($user));
+          if (count($user) !==0) {
+              return response()->json([
+                  'message' => 'Email Taken'
+              ], 401);
+          }else{
+            $user=User::create([
+                'name'=>$request['name'],
+                'email'=>$request['email'],
+                'password'=>Hash::make($request['password'])
+            ]);
+            $users=User->get();
+            return response()->json([
+                'message' => 'User added',
+                'users'=>$users
+            ]);
+          }
+       
+
     }
 }

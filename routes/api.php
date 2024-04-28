@@ -25,3 +25,5 @@ Route::get("/all",[Usercontrol::class, 'all']);
 Route::post("/edit",[Usercontrol::class, 'edit']);
 Route::post("/update",[Usercontrol::class, 'up']);
 Route::post("/del",[Usercontrol::class, 'del']);
+
+Route::post("/newUser",[Usercontrol::class, 'userNew']);
