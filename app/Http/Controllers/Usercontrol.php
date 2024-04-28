@@ -67,7 +67,7 @@ class Usercontrol extends Controller
                 'email'=>$request['email'],
                 'password'=>Hash::make($request['password'])
             ]);
-            $users=User->get();
+            $users=User::get();
             return response()->json([
                 'message' => 'User added',
                 'users'=>$users
